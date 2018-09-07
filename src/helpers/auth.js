@@ -1,12 +1,12 @@
 import locationHelperBuilder from 'redux-auth-wrapper/history4/locationHelper';
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
-import Spinner from '../components/layout/Spinner';
+import LoadingScreen from '../components/layout/Spinner';
 
 const locationHelper = locationHelperBuilder({});
 
 export const UserIsAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: 'UserIsAuthenticated',
-  AuthenticatingComponent: Spinner,
+  AuthenticatingComponent: LoadingScreen,
   allowRedirectBack: true,
   redirectPath: (state, ownProps) =>
     locationHelper.getRedirectQueryParam(ownProps) || '/login',
@@ -18,7 +18,7 @@ export const UserIsAuthenticated = connectedRouterRedirect({
 
 export const UserIsNotAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: 'UserIsNotAuthenticated',
-  AuthenticatingComponent: Spinner,
+  AuthenticatingComponent: LoadingScreen,
   allowRedirectBack: false,
   redirectPath: (state, ownProps) =>
     locationHelper.getRedirectQueryParam(ownProps) || '/',

@@ -19,8 +19,10 @@ class Clients extends Component {
       const total = clients.reduce((total, client) => {
         return total + parseFloat(client.balance.toString());
       }, 0);
+
       return { totalOwed: total };
     }
+
     return null;
   }
 
@@ -47,6 +49,7 @@ class Clients extends Component {
               </h5>
             </div>
           </div>
+
           <table className="table table-striped">
             <thead className="thead-inverse">
               <tr>

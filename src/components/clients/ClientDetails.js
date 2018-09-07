@@ -13,6 +13,7 @@ class ClientDetails extends Component {
     balanceUpdateAmount: ''
   };
 
+  // Update balance
   balanceSubmit = e => {
     e.preventDefault();
 
@@ -22,9 +23,12 @@ class ClientDetails extends Component {
     const clientUpdate = {
       balance: parseFloat(balanceUpdateAmount)
     };
+
+    // Update in firestore
     firestore.update({ collection: 'clients', doc: client.id }, clientUpdate);
   };
 
+  // Delete client
   onDeleteClick = () => {
     const { client, firestore, history } = this.props;
 
@@ -40,23 +44,23 @@ class ClientDetails extends Component {
     const { showBalanceUpdate, balanceUpdateAmount } = this.state;
 
     let balanceForm = '';
-
+    // If balance form should display
     if (showBalanceUpdate) {
       balanceForm = (
         <form onSubmit={this.balanceSubmit}>
           <div className="input-group">
             <input
-              name="balanceUpdateAmount"
               type="text"
               className="form-control"
-              placeholder="Add new balance"
+              name="balanceUpdateAmount"
+              placeholder="Add New Balance"
               value={balanceUpdateAmount}
               onChange={this.onChange}
             />
             <div className="input-group-append">
               <input
                 type="submit"
-                value="Value"
+                value="Update"
                 className="btn btn-outline-dark"
               />
             </div>
@@ -73,7 +77,7 @@ class ClientDetails extends Component {
           <div className="row">
             <div className="col-md-6">
               <Link to="/" className="btn btn-link">
-                <i className="fas fa-arrow-circle-left" /> Back to Dashboard
+                <i className="fas fa-arrow-circle-left" /> Back To Dashboard
               </Link>
             </div>
             <div className="col-md-6">
@@ -97,7 +101,7 @@ class ClientDetails extends Component {
                 <div className="col-md-8 col-sm-6">
                   <h4>
                     Client ID:{' '}
-                    <span className="text-secondary">{client.id}</span>{' '}
+                    <span className="text-secondary">{client.id}</span>
                   </h4>
                 </div>
                 <div className="col-md-4 col-sm-6">
@@ -106,8 +110,7 @@ class ClientDetails extends Component {
                     <span
                       className={classnames({
                         'text-danger': client.balance > 0,
-                        // eslint-disable-next-line
-                        'text-success': client.balance == 0
+                        'text-success': client.balance === 0
                       })}
                     >
                       ${parseFloat(client.balance).toFixed(2)}
@@ -128,6 +131,8 @@ class ClientDetails extends Component {
                   {balanceForm}
                 </div>
               </div>
+
+              <hr />
               <ul className="list-group">
                 <li className="list-group-item">
                   Contact Email: {client.email}

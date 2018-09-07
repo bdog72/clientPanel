@@ -13,7 +13,6 @@ export default function(state = initialState, action) {
         message: action.message,
         messageType: action.messageType
       };
-
     default:
       return state;
   }

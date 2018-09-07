@@ -4,21 +4,49 @@ import {
   ALLOW_REGISTRATION
 } from './types';
 
-export conse setDisableBalanceOnAdd = () => {
-    return {
-        type: DISABLE_BALANCE_ON_ADD
-    }
-}
+export const setDisableBalanceOnAdd = () => {
+  // Get settings from localStorage
+  const settings = JSON.parse(localStorage.getItem('settings'));
 
-export conse setDisableBalanceOnEdit = () => {
-    return {
-        type: DISABLE_BALANCE_ON_EDIT
-    }
-}
+  // Toggle
+  settings.disableBalanceOnAdd = !settings.disableBalanceOnAdd;
 
-export conse setAllowRegistration = () => {
-    return {
-        type: ALLOW_REGISTRATION
-    }
-}
+  // Set back to localStorage
+  localStorage.setItem('settings', JSON.stringify(settings));
 
+  return {
+    type: DISABLE_BALANCE_ON_ADD,
+    payload: settings.disableBalanceOnAdd
+  };
+};
+
+export const setDisableBalanceOnEdit = () => {
+  // Get settings from localStorage
+  const settings = JSON.parse(localStorage.getItem('settings'));
+
+  // Toggle
+  settings.disableBalanceOnEdit = !settings.disableBalanceOnEdit;
+
+  // Set back to localStorage
+  localStorage.setItem('settings', JSON.stringify(settings));
+
+  return {
+    type: DISABLE_BALANCE_ON_EDIT,
+    payload: settings.disableBalanceOnEdit
+  };
+};
+
+export const setAllowRegistration = () => {
+  // Get settings from localStorage
+  const settings = JSON.parse(localStorage.getItem('settings'));
+
+  // Toggle
+  settings.allowRegistration = !settings.allowRegistration;
+
+  // Set back to localStorage
+  localStorage.setItem('settings', JSON.stringify(settings));
+  return {
+    type: ALLOW_REGISTRATION,
+    payload: settings.allowRegistration
+  };
+};
